@@ -8,19 +8,19 @@
 #
 
 #install apache
-package "apache2" do
+package "httpd" do
 	action :install
 end
 
 #start the service
 
 #make sure that it starts at reboot
-service "apache2" do
+service "httpd" do
 	action [:start, :enable]
 end
 
 #write homepage
-cookbook_file "/var/www/index.html" do
+cookbook_file "/var/www/html/index.html" do
 	source "index.html"
 	mode "0644"
 end
