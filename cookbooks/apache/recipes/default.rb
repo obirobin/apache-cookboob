@@ -8,19 +8,26 @@
 #
 
 #install apache
-package "httpd" do
+
+
+package node["package_name"] do
 	action :install
 end
 
 #start the service
 
 #make sure that it starts at reboot
-service "httpd" do
+service node["service_name"] do
 	action [:start, :enable]
 end
 
-#write homepage
-cookbook_file "/var/www/html/index.html" do
-	source "index.html"
+##write homepage
+#cookbook_file "#{document_root}/index.html" do
+#	source "index.html"
+#	mode "0644"
+#end
+
+template "#{node["document_root"]}/index.html" do
+	source "index.html.erb"
 	mode "0644"
 end
